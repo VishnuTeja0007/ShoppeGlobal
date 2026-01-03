@@ -1,5 +1,7 @@
 import { ShoppingCart, Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -35,9 +37,12 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
 
           {/* LOGO */}
-          <div className="text-2xl font-bold text-light-primary dark:text-dark-primary">
+          <NavLink
+            to="/"
+            className="text-2xl  font-bold text-light-primary dark:text-dark-primary"
+          >
             Shoppe
-          </div>
+          </NavLink>
 
           {/* TABLET MENU (500px - 767px) */}
               {/* Theme Toggle */}
@@ -49,25 +54,34 @@ export function Header() {
               aria-label="Toggle theme">
               {dark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
             </button>
-
-            <a href="#" className="text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
+            
+            <NavLink to="/products" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
               Products
-            </a>
+            </NavLink>
+
+            <NavLink to="/products-details" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
+              Product details
+            </NavLink>
+<NavLink to="/checkout" className="text-light-text dark:text-dark-text active:text-gray-300 hover:text-light-primary dark:hover:text-dark-primary transition-colors">
+              checkout
+            </NavLink>
+
+
 
             {/* Cart */}
-            <button className="relative">
+            <NavLink to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
               <span className="absolute -top-2 -right-2 bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">
                 2
               </span>
-            </button>
+            </NavLink>
           </div>
 
           {/* DESKTOP MENU (768px+) */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#" className="text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
+            <NavLink to="/products" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
               Products
-            </a>
+            </NavLink>
 
             {/* Theme Toggle */}
             <button
@@ -79,12 +93,12 @@ export function Header() {
             </button>
 
             {/* Cart */}
-            <button className="relative">
-              <ShoppingCart className="w-6 h-6 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
+            <NavLink to="/cart" className="relative">
+              <ShoppingCart className="w-6 h-6 text-light-text  dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
               <span className="absolute -top-2 -right-2 bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">
                 2
               </span>
-            </button>
+            </NavLink>
           </div>
 
           {/* MOBILE HAMBURGER (only when <= 500px) */}
@@ -114,15 +128,15 @@ export function Header() {
       {open && showHamburger && (
         <div className="md:hidden bg-light-surface dark:bg-dark-surface border-t border-light-border dark:border-dark-border transition-all duration-300 ease-in-out">
           <div className="flex flex-col gap-4 p-4">
-            <a href="#" className="text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors py-2">
+            <NavLink to="/products" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors py-2">
               Products
-            </a>
+            </NavLink>
 
-            <div className="flex items-center gap-2 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors py-2">
+            <NavLink to="/cart" className="flex items-center active:text-gray-300 gap-2 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors py-2">
               <ShoppingCart className="w-5 h-5" />
               <span>Cart</span>
               <span className="ml-auto bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">2</span>
-            </div>
+            </NavLink>
           </div>
         </div>
       )}

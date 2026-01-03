@@ -39,7 +39,7 @@ if (error) {
     />
   );
 }
-return <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+return <div className="grid p-4 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
           {data.map(element => {
             return <ProductItem key={element.id} {...element}></ProductItem>
           })}

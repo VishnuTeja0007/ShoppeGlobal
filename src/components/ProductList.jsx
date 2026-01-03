@@ -1,6 +1,7 @@
 import { ProductItem } from "./ProductItem"
 import { useEffect, useState } from "react"
 import { ErrorState } from "./Error";
+import Loading from "./Loading";
 
 export function Productlist(props) {
     const [data,setData]=useState([])
@@ -26,7 +27,19 @@ export function Productlist(props) {
         fetchProducts()
     },[])
     console.log(data)
-    if (loading) return <div className="p-6 text-light-muted dark:text-dark-muted">Loading…</div>;
+   
+    if (loading){
+      return (
+        <div className="h-screen flex items-center justify-center">
+          
+          <Loading/>
+
+        </div>
+      )
+      
+    
+    } 
+      
 
 if (error) {
   return (

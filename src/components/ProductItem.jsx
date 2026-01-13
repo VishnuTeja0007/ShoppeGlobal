@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../utils/cartSlicer";
 // import image from "../assets/image.png"
 export function ProductItem(props) {
-
+  const dispatch=useDispatch()
+  function addItemToCart(item){
+    dispatch(addToCart({...item,["noOfItems"]:0}))
+  }
   function stars(rating) {
     const totalStars = 5;
 
@@ -79,10 +83,11 @@ export function ProductItem(props) {
     </button>
     </Link>
     {/* {add to cart} */}
-    <Link to={`/cart/`}>
+    {/* <Link to={`/cart/`}> */}
 
     <button
       type="button"
+      onClick={()=>{addItemToCart(props)}}
       className="
           bg-cyan-400 hover:bg-cyan-800
           w-full mt-auto mb-3
@@ -93,7 +98,7 @@ export function ProductItem(props) {
     >
      Add to Cart
     </button>
-    </Link>
+    {/* </Link> */}
     </div>
     
     

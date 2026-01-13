@@ -4,11 +4,10 @@ import { Outlet } from 'react-router-dom'
 
 const RouterLayout = () => {
   return (
-    <div>
-      <Header />
-        <Outlet />
-    <Footer/>
-    </div>
+<h1>layout</h1>
+
+  
+    
   )
 }
 

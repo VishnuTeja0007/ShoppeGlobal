@@ -1,13 +1,18 @@
 import { ShoppingCart, Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
   const [showHamburger, setShowHamburger] = useState(true);
-
+  const [cartItems,setCartItems]=useState(0)
+  const selector=useSelector((state)=>{return state.cart.cartItems})
+  console.log(selector)
+  useEffect(()=>{
+    setCartItems(selector.length)
+  },[selector])
   // Sync theme with HTML root
   useEffect(() => {
     const root = document.documentElement;
@@ -72,7 +77,7 @@ export function Header() {
             <NavLink to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
               <span className="absolute -top-2 -right-2 bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">
-                2
+                {cartItems}
               </span>
             </NavLink>
           </div>
@@ -96,7 +101,7 @@ export function Header() {
             <NavLink to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-light-text  dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
               <span className="absolute -top-2 -right-2 bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">
-                2
+               {cartItems}
               </span>
             </NavLink>
           </div>

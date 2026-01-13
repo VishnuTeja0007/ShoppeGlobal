@@ -9,7 +9,7 @@ import {Productlist} from './components/ProductList'
 import ProductDetailPage from './pages/ProductDetailPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
-import {ErrorState} from './components/Error'
+import Error from './components/Error'
 import {RouterProvider} from "react-router-dom"
 
   import App from './App';
@@ -17,6 +17,7 @@ const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <Error/>,
     children: [
       {
         index: true,
@@ -43,16 +44,6 @@ const appRouter = createBrowserRouter([
       {
         path: 'checkout',
         element: <CheckoutPage />,
-      },
-      {
-        path: '*',
-        element: (
-          <ErrorState
-            status={404}
-            title="Page not found"
-            message="try valid routes"
-          />
-        ),
       },
     ],
   },

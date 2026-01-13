@@ -25,24 +25,26 @@ export default function ProductDetail() {
   const [data, loading, error] = useFetch(`https://dummyjson.com/products/${id}`);
 
   if (loading){
- return (
- <div className="h-screen w-full flex items-center justify-center">
-    <Loading/>
-    </div>
-  )
-}      
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Loading/>
+      </div>
+    )
+  }      
   if (error) {
-return (
-<div className="h-screen w-full flex items-center justify-center">
-    <Error/>
-    </div>
-)
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <Error/>
+      </div>
+    )
   }
-      if (!data) return null;
+  if (!data) return null;
 
+  // Add safe fallbacks for optional fields
+  const mainImage = data.images?.[0] ?? data.thumbnail ?? "";
+  const reviews = Array.isArray(data.reviews) ? data.reviews : [];
 
   const discountedPrice = (data.price * (1 - data.discountPercentage / 100)).toFixed(2);
-
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
@@ -55,7 +57,7 @@ return (
           <div className="space-y-4">
             <div className="aspect-square rounded-3xl bg-slate-50 border border-slate-100 overflow-hidden group">
               <img 
-                src={data.images[0]} 
+                src={mainImage} 
                 alt={data.title}
                 className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
               />
@@ -104,7 +106,7 @@ return (
               </div>
               <span className="text-sm font-bold text-slate-900">{data.rating}</span>
               <span className="text-sm text-slate-400 border-l pl-4 border-slate-200">
-                {data.reviews.length} Customer Reviews
+                {reviews.length} Customer Reviews
               </span>
             </div>
 
@@ -175,7 +177,7 @@ return (
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {data.reviews.map((rev, idx) => (
+                {reviews.map((rev, idx) => (
                     <div key={idx} className="p-6 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
                         <div>
                             <div className="flex gap-1 mb-3">
@@ -187,11 +189,11 @@ return (
                         </div>
                         <div className="flex items-center gap-3 pt-4 border-t border-slate-200/50">
                             <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">
-                                {rev.reviewerName.charAt(0)}
+                                {rev.reviewerName?.charAt(0) ?? "?"}
                             </div>
                             <div>
-                                <p className="text-xs font-bold">{rev.reviewerName}</p>
-                                <p className="text-[10px] text-slate-400">{new Date(rev.date).toLocaleDateString()}</p>
+                                <p className="text-xs font-bold">{rev.reviewerName ?? "Anonymous"}</p>
+                                <p className="text-[10px] text-slate-400">{rev.date ? new Date(rev.date).toLocaleDateString() : ""}</p>
                             </div>
                         </div>
                     </div>

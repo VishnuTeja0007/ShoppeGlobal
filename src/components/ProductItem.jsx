@@ -1,8 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 // import image from "../assets/image.png"
 export function ProductItem(props) {
-  const navigate = useNavigate()
+
   function stars(rating) {
     const totalStars = 5;
 
@@ -22,6 +22,9 @@ export function ProductItem(props) {
 
   return <div className="
       p-4 bg-white border border-gray-200
+      hover:bg-gray-200
+      hover:border-teal-400
+      hover:shadow-teal-400
       rounded-lg shadow shadow-black/10
       max-w-80
       flex flex-col
@@ -43,7 +46,7 @@ export function ProductItem(props) {
     {/* Description */}
     <p className="text-gray-800 text-sm mx-2 mb-4
         line-clamp-3 min-h-[4.5rem]">
-      {props.description.slice(0,100)} <NavLink to={`/product/${props.id}`} className="text-cyan-400" >...more</NavLink>
+      {props.description.slice(0,100)} <Link to={`/products/${props.id}`} className="text-cyan-400" >...more</Link>
     </p>
 
     {/* Info section */}
@@ -60,19 +63,40 @@ export function ProductItem(props) {
     </div>
 
     {/* Button (always bottom aligned) */}
+    <div className="mt-2 ">
+<Link to={`/products/${props.id}`}>
     <button
       type="button"
-      onClick={() => navigate(`/product/${props.id}`)}
       className="
           bg-cyan-400 hover:bg-cyan-800
-          w-[90%] mx-auto mt-auto mb-3
-          px-6 py-2 font-medium
+          w-full  mt-auto mb-3
+          px-4 py-2 font-medium text-center
           rounded-md text-white text-sm
-          transition
+          transition text-nowrap
         "
     >
       Details
     </button>
+    </Link>
+    {/* {add to cart} */}
+    <Link to={`/cart/`}>
+
+    <button
+      type="button"
+      className="
+          bg-cyan-400 hover:bg-cyan-800
+          w-full mt-auto mb-3
+          px-4 py-2 font-medium text-center
+          rounded-md text-white text-sm
+          transition text-nowrap
+        "
+    >
+     Add to Cart
+    </button>
+    </Link>
+    </div>
+    
+    
   </div>
 
 }

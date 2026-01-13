@@ -1,109 +1,95 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../utils/cartSlicer";
-// import image from "../assets/image.png"
+import { Star, ShoppingCart, Eye } from "lucide-react";
+import { useEffect } from "react";
+
 export function ProductItem(props) {
-  const dispatch=useDispatch()
-  function addItemToCart(item){
-    dispatch(addToCart({...item,["noOfItems"]:0}))
-  }
-  function stars(rating) {
-    const totalStars = 5;
+  const dispatch = useDispatch();
 
+  function addItemToCart(item) {
+    // Ensuring we pass a clean object to the dispatcher
+    console.log("dispatch called")
+    dispatch(addToCart({ ...item, noOfItems: 1 }));
+  }
+ 
+
+  const renderStars = (rating) => {
     return (
-      <span>
-        {[...Array(totalStars)].map((_, index) => (
-          <span key={index}>
-            {index < rating ? "⭐" : "☆"}
-          </span>
+      <div className="flex items-center gap-0.5 text-light-accent dark:text-dark-accent">
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            size={14}
+            fill={index < Math.round(rating) ? "currentColor" : "none"}
+            className={index < Math.round(rating) ? "" : "text-light-muted/30"}
+          />
         ))}
-      </span>
+        <span className="ml-2 text-xs text-light-muted dark:text-dark-muted">({rating})</span>
+      </div>
     );
-  }
-//  
+  };
 
-  return <div className="
-      p-4 bg-white border border-gray-200
-      hover:bg-gray-200
-      hover:border-teal-400
-      hover:shadow-teal-400
-      rounded-lg shadow shadow-black/10
-      max-w-80
-      flex flex-col
-      hover:-translate-y-1 transition duration-300
-    ">
-    {/* Image */}
-    <img
-      className="rounded-md h-40 w-full object-cover"
-      src={props.images[0]}
-      alt={props.title}
-    />
+  return (
+    <div className="group relative flex flex-col w-full max-w-sm bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl overflow-hidden hover:border-light-primary/50 dark:hover:border-dark-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      
+      {/* Product Image Wrapper */}
+      <div className="relative aspect-square overflow-hidden bg-white">
+        <img
+          className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+          src={props.images[0]}
+          alt={props.title}
+          loading="lazy"
+        />
+        {/* Category Badge */}
+        <div className="absolute top-3 left-3 px-2 py-1 text-[10px] font-bold uppercase tracking-widest bg-light-primary dark:bg-dark-primary text-white dark:text-dark-bg rounded-md shadow-sm">
+          {props.category}
+        </div>
+      </div>
 
-    {/* Title */}
-    <h2 className="text-gray-900 text-xl font-semibold mx-2 my-4
-        line-clamp-2 min-h-[3rem]">
-      {props.title}
-    </h2>
+      {/* Content Section */}
+      <div className="p-5 flex flex-col flex-grow">
+        <h2 className="text-light-text dark:text-dark-text text-lg font-bold line-clamp-1 mb-1 group-hover:text-light-primary dark:group-hover:text-dark-primary transition-colors">
+          {props.title}
+        </h2>
+        
+        <div className="mb-3">
+          {renderStars(props.rating)}
+        </div>
 
-    {/* Description */}
-    <p className="text-gray-800 text-sm mx-2 mb-4
-        line-clamp-3 min-h-[4.5rem]">
-      {props.description.slice(0,100)} <Link to={`/products/${props.id}`} className="text-cyan-400" >...more</Link>
-    </p>
+        <p className="text-light-muted dark:text-dark-muted text-sm line-clamp-2 mb-4 h-10">
+          {props.description}
+        </p>
 
-    {/* Info section */}
-    <div className="text-sm text-gray-900 mx-2 min-h-[4.5rem]">
-      <p>
-        <b>Rating&nbsp;:</b>&nbsp;{stars(props.rating)}
-      </p>
-      <p>
-        <b>Category&nbsp;:</b>&nbsp;{props.category}
-      </p>
-      <p>
-        <b>Price&nbsp;:</b>&nbsp;₹{props.price}
-      </p>
+        {/* Price Tag */}
+        <div className="mt-auto flex items-end justify-between">
+          <div className="flex flex-col">
+            <span className="text-xs text-light-muted dark:text-dark-muted font-medium">Price</span>
+            <span className="text-xl font-black text-light-text dark:text-dark-text">
+              ₹{props.price.toLocaleString()}
+            </span>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="grid grid-cols-2 gap-2 mt-4">
+          <Link 
+            to={`/products/${props.id}`}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold border border-light-border dark:border-dark-border text-light-text dark:text-dark-text rounded-xl hover:bg-light-bg dark:hover:bg-dark-bg transition-all"
+          >
+            <Eye size={16} />
+            Details
+          </Link>
+          
+          <button
+            onClick={() => addItemToCart(props)}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold bg-light-primary dark:bg-dark-primary text-white dark:text-dark-bg rounded-xl shadow-lg shadow-light-primary/20 dark:shadow-dark-primary/20 hover:opacity-90 active:scale-95 transition-all"
+          >
+            <ShoppingCart size={16} />
+            Add
+          </button>
+        </div>
+      </div>
     </div>
-
-    {/* Button (always bottom aligned) */}
-    <div className="mt-2 ">
-<Link to={`/products/${props.id}`}>
-    <button
-      type="button"
-      className="
-          bg-cyan-400 hover:bg-cyan-800
-          w-full  mt-auto mb-3
-          px-4 py-2 font-medium text-center
-          rounded-md text-white text-sm
-          transition text-nowrap
-        "
-    >
-      Details
-    </button>
-    </Link>
-    {/* {add to cart} */}
-    {/* <Link to={`/cart/`}> */}
-
-    <button
-      type="button"
-      onClick={()=>{addItemToCart(props)}}
-      className="
-          bg-cyan-400 hover:bg-cyan-800
-          w-full mt-auto mb-3
-          px-4 py-2 font-medium text-center
-          rounded-md text-white text-sm
-          transition text-nowrap
-        "
-    >
-     Add to Cart
-    </button>
-    {/* </Link> */}
-    </div>
-    
-    
-  </div>
-
+  );
 }
-
-
-
-

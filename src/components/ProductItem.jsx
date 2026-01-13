@@ -22,8 +22,6 @@ export function ProductItem(props) {
   }
 //  
 
-  console.log(props)
-
   return <div className="
       p-4 bg-white border border-gray-200
       hover:bg-gray-200

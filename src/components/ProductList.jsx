@@ -5,7 +5,6 @@ import Loading from "./Loading";
 import useFetch from "../utils/useFetch";
 export function Productlist(props) {
     const[data,loading,error]=useFetch("https://dummyjson.com/products")
-    console.log(data)
    
     if (loading){
       return (

@@ -3,31 +3,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ===== SHOPPE LIGHT THEME ===== */
-
-/* @theme .dark{
-  --color-primary: #0f766e;
-  --color-secondary: #2563eb;
-  --color-accent: #f59e0b;
-
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-
-  --color-text: #0f172a;
-  --color-muted: #64748b;
-  --color-border: #e2e8f0;
-} */
-
-
-@theme{
-     --breakpoint-xs: "420px";   
-     --breakpoint-sm: "640px";
-     --breakpoint-md: "768px";
-      --breakpoint-lg: "1024px";
-      --breakpoint-xl: "1280px";
-}
 /* ===== SHOPPE DARK THEME ===== */
 @theme {
+--breakpoint-xxs:300px;
+     --breakpoint-xs: 420px;   
+     --breakpoint-sm: 640px;
+     --breakpoint-md: 768px;
+      --breakpoint-lg: 1024px;
+      --breakpoint-xl: 1280px;
 
   /* dark theme colors */
 

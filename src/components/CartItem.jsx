@@ -1,12 +1,22 @@
 import { StarIcon, Trash2, Plus, Minus } from "lucide-react";
-
-const CartItem = ({ item, onUpdateQty, onDelete }) => {
+import { useDispatch } from "react-redux";
+import { addToCart, decreaseCart, removeCart } from "../utils/cartSlicer";
+const CartItem = ({ item }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
   }
-
-  // Calculate discounted price
+  
   const discountedPrice = (item.price * (1 - item.discountPercentage / 100)).toFixed(2);
+const dispatch=useDispatch()
+function decrease(){
+    dispatch(decreaseCart(item))
+  }
+  function increase(){
+    dispatch(addToCart(item))
+  }
+  function remove(){
+    dispatch(removeCart(item))
+  }
 
   return (
     <div className= "h-auto w-[90%] flex flex-row md:flex-row items-center justify-start border-2 rounded-[2rem] p-6 border-teal-400 bg-white gap-8 transition-all hover:shadow-md">
@@ -77,14 +87,14 @@ const CartItem = ({ item, onUpdateQty, onDelete }) => {
           {/* Plus/Minus Counter */}
           <div className="flex items-center border-2 border-gray-100 rounded-xl p-1 bg-gray-50">
             <button 
-              onClick={() => onUpdateQty(item.id, -1)}
+              onClick={decrease}
               className="p-2 hover:bg-white rounded-lg transition-colors text-gray-600"
             >
               <Minus size={18} />
             </button>
             <span className="w-10 text-center font-bold text-gray-800">{item.noOfItems || 1}</span>
             <button 
-              onClick={() => onUpdateQty(item.id, 1)}
+              onClick={increase}
               className="p-2 hover:bg-white rounded-lg transition-colors text-gray-600"
             >
               <Plus size={18} />
@@ -100,7 +110,7 @@ const CartItem = ({ item, onUpdateQty, onDelete }) => {
             </button>
             
             <button 
-              onClick={() => onDelete(item.id)}
+              onClick={remove}
               className="p-3 rounded-xl border border-gray-200 text-gray-400 hover:text-rose-500 hover:border-rose-200 transition-all hover:bg-rose-50"
               title="Remove from cart"
             >

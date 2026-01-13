@@ -7,10 +7,7 @@ function classNames(...classes) {
 
 export default function ProductDetail() {
   const {id}=useParams()
-  console.log(id)
   const[data,loading,error]=useFetch(`https://dummyjson.com/products/${id}`)
-  console.log(data)
-  console.log(error)
   return (
     <div className="flex flex-col gap-4">
       <span className="text-sm uppercase tracking-wide text-rose-500 font-semibold">

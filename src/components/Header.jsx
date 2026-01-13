@@ -8,10 +8,10 @@ export function Header() {
   const [dark, setDark] = useState(false);
   const [showHamburger, setShowHamburger] = useState(true);
   const [cartItems,setCartItems]=useState(0)
-  const selector=useSelector((state)=>{return state.cart.cartItems})
+  const selector=useSelector((state)=>{return state.cart.totalQuantity})
 
   useEffect(()=>{
-    setCartItems(selector.length)
+    setCartItems(selector)
   },[selector])
   // Sync theme with HTML root
   useEffect(() => {

@@ -10,9 +10,10 @@ const Cart = () => {
     setCartItems(selector)
   },[selector])
     return (
-    <div className='h-screen w-auto'>
+    <div className='h-auto w-auto p-4 flex flex-col items-center justify-center gap-4'>
       {
         cartItems.map((item)=>{
+          console.log(item)
           return <CartItem key={item.id} item={item}/>
         })
       }

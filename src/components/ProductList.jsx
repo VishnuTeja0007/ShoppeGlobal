@@ -2,30 +2,9 @@ import { ProductItem } from "./ProductItem"
 import { useEffect, useState } from "react"
 import { ErrorState } from "./Error";
 import Loading from "./Loading";
-
+import useFetch from "../utils/useFetch";
 export function Productlist(props) {
-    const [data,setData]=useState([])
-    const [loading,setLoading]=useState(false)
-    const [error,setError]=useState(null)
-    useEffect(()=>{
-        const fetchProducts= async ()=>{
-          try{
-              setLoading(true)
-              const data= await fetch("https://dummyjson.com/products")
-              const json= await data.json()
-              
-              setData(json.products)
-          }
-          catch(error){
-            setLoading(false)
-            setError(error)
-          }
-          finally{
-            setLoading(false)
-          }
-        }
-        fetchProducts()
-    },[])
+    const[data,loading,error]=useFetch("https://dummyjson.com/products")
     console.log(data)
    
     if (loading){

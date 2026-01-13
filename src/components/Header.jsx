@@ -9,7 +9,7 @@ export function Header() {
   const [showHamburger, setShowHamburger] = useState(true);
   const [cartItems,setCartItems]=useState(0)
   const selector=useSelector((state)=>{return state.cart.cartItems})
-  console.log(selector)
+
   useEffect(()=>{
     setCartItems(selector.length)
   },[selector])

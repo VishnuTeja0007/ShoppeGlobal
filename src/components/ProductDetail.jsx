@@ -1,16 +1,20 @@
 import { StarIcon } from "lucide-react"
-import { useLoaderData } from "react-router-dom"
-
+import useFetch from "../utils/useFetch"
+import { useParams } from "react-router-dom"
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ProductDetail() {
-  const data = useLoaderData()
+  const {id}=useParams()
+  console.log(id)
+  const[data,loading,error]=useFetch(`https://dummyjson.com/products/${id}`)
+  console.log(data)
+  console.log(error)
   return (
     <div className="flex flex-col gap-4">
       <span className="text-sm uppercase tracking-wide text-rose-500 font-semibold">
-        {data.category}
+        {data.catagory}
       </span>
 
       <h1 className="text-3xl font-bold text-gray-800">

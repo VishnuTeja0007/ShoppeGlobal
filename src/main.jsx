@@ -11,7 +11,7 @@ import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import {ErrorState} from './components/Error'
 import {RouterProvider} from "react-router-dom"
-import { getDetails } from './Loader/getDetails'
+
   import App from './App';
 const appRouter = createBrowserRouter([
   {
@@ -33,7 +33,6 @@ const appRouter = createBrowserRouter([
           {
             path: ':id',
             element: <ProductDetailPage />,
-            loader: getDetails, // Keep your loader functions here
           },
         ],
       },

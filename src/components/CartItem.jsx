@@ -1,5 +1,6 @@
 import { StarIcon, Trash2, Plus, Minus } from "lucide-react";
 import { useDispatch } from "react-redux";
+import { ShoppingBag } from "lucide-react";
 import { addToCart, decreaseCart, removeCart } from "../utils/cartSlicer";
 const CartItem = ({ item }) => {
   function classNames(...classes) {
@@ -18,105 +19,89 @@ function decrease(){
     dispatch(removeCart(item))
   }
 
-  return (
-    <div className= "h-auto w-[90%] flex flex-row md:flex-row items-center justify-start border-2 rounded-[2rem] p-6 border-teal-400 bg-white gap-8 transition-all hover:shadow-md">
-      {/* Image Container */}
-      <div className="flex-shrink-0">
+ return (
+    <div className="h-auto w-full flex flex-col md:flex-row items-center justify-start border-2 rounded-[2rem] p-6 border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface gap-8 transition-all hover:border-light-primary/50 hover:shadow-xl group">
+      
+      {/* Image Container - Using white background for product visibility */}
+      <div className="flex-shrink-0 bg-white p-4 rounded-2xl border border-light-border dark:border-dark-border shadow-inner">
         <img 
           src={item.images[0]} 
           alt={item.title} 
-          className="h-48 w-48 md:h-64 md:w-64 object-contain rounded-2xl" 
+          className="h-40 w-40 md:h-52 md:w-52 object-contain transition-transform duration-500 group-hover:scale-105" 
         />
       </div>
 
-      <div className="flex flex-col gap-3 flex-1">
-        <span className="text-xs uppercase tracking-widest text-rose-500 font-bold">
-          {item.category}
-        </span>
+      <div className="flex flex-col gap-3 flex-1 w-full">
+        <div className="flex justify-between items-start">
+          <span className="text-xs uppercase tracking-widest text-light-primary font-black">
+            {item.category}
+          </span>
+          <button 
+              onClick={remove}
+              className="p-3 rounded-xl border border-light-border dark:border-dark-border text-light-muted hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all"
+              title="Remove from cart"
+            >
+              <Trash2 size={24} />
+          </button>
+        </div>
 
-        <h1 className="text-2xl font-bold text-gray-800 leading-tight">
+        <h1 className="text-3xl font-black text-light-text dark:text-dark-text leading-tight -mt-2">
           {item.title}
         </h1>
 
-        <p className="text-gray-600 text-sm line-clamp-2">
-          {item.description}
-        </p>
-
-        {/* Rating */}
-        <div className="flex items-center gap-2">
-          <div className="flex">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <StarIcon
-                key={i}
-                className={classNames(
-                  "h-4 w-4",
-                  i < Math.round(item.rating)
-                    ? "fill-yellow-400 text-yellow-400"
-                    : "text-gray-300"
-                )}
-              />
-            ))}
-          </div>
-          <span className="text-xs font-medium text-gray-500">
-            {item.rating} / 5
+        {/* Brand & Stock - Enhanced Text Size */}
+        <div className="flex gap-4 text-sm text-light-muted font-bold">
+          <span>Brand: <span className="text-light-text dark:text-dark-text">{item.brand}</span></span>
+          <span className="flex items-center gap-1">
+            Status: 
+            <span className={item.stock > 0 ? "text-green-500" : "text-rose-500"}>
+               {item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}
+            </span>
           </span>
         </div>
 
-        {/* Price Section */}
-        <div className="flex items-baseline gap-3">
-          <span className="text-3xl font-black text-gray-900">
+        {/* Pricing - Larger Font Sizes */}
+        <div className="flex items-center gap-4 py-2">
+          <span className="text-4xl font-black text-light-text dark:text-dark-text">
             ${discountedPrice}
           </span>
-          <span className="text-sm line-through text-gray-400">
+          <span className="text-lg line-through text-light-muted">
             ${item.price}
           </span>
-          <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-lg font-bold">
+          <span className="bg-light-primary/10 text-light-primary text-xs px-3 py-1 rounded-full font-black animate-pulse">
             {item.discountPercentage}% OFF
           </span>
         </div>
 
-        {/* Brand & Stock */}
-        <div className="flex gap-4 text-xs text-gray-500 border-b pb-4">
-          <span><strong>Brand:</strong> {item.brand}</span>
-          <span><strong>Stock:</strong> {item.stock > 0 ? `${item.stock} left` : 'Out of stock'}</span>
-        </div>
-
-        {/* Footer Actions: Quantity + Buy + Delete */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-2">
+        {/* Footer Actions: Counter + Buy */}
+        <div className="flex flex-wrap items-center justify-between gap-6 mt-4 pt-6 border-t border-light-border dark:border-dark-border">
           
-          {/* Plus/Minus Counter */}
-          <div className="flex items-center border-2 border-gray-100 rounded-xl p-1 bg-gray-50">
+          {/* Enhanced Plus/Minus Counter */}
+          <div className="flex items-center border-2 border-light-border dark:border-dark-border rounded-2xl p-1 bg-white dark:bg-dark-bg">
             <button 
               onClick={decrease}
-              className="p-2 hover:bg-white rounded-lg transition-colors text-gray-600"
+              className="p-3 hover:bg-light-surface dark:hover:bg-dark-surface rounded-xl transition-colors text-light-text dark:text-dark-text"
             >
-              <Minus size={18} />
+              <Minus size={22} strokeWidth={3} />
             </button>
-            <span className="w-10 text-center font-bold text-gray-800">{item.noOfItems || 1}</span>
+            <span className="w-12 text-center text-xl font-black text-light-text dark:text-dark-text">
+                {item.noOfItems || 1}
+            </span>
             <button 
               onClick={increase}
-              className="p-2 hover:bg-white rounded-lg transition-colors text-gray-600"
+              className="p-3 hover:bg-light-surface dark:hover:bg-dark-surface rounded-xl transition-colors text-light-text dark:text-dark-text"
             >
-              <Plus size={18} />
+              <Plus size={22} strokeWidth={3} />
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button 
-              type="button" 
-              className="rounded-xl bg-teal-500 text-white font-bold hover:bg-teal-600 px-8 py-3 transition-colors shadow-sm"
-            >
-              Buy Now
-            </button>
-            
-            <button 
-              onClick={remove}
-              className="p-3 rounded-xl border border-gray-200 text-gray-400 hover:text-rose-500 hover:border-rose-200 transition-all hover:bg-rose-50"
-              title="Remove from cart"
-            >
-              <Trash2 size={22} />
-            </button>
-          </div>
+          <button 
+            type="button" 
+            className="flex-1 md:flex-none flex items-center justify-center gap-3 rounded-2xl bg-light-text dark:bg-dark-primary text-white dark:text-dark-bg font-black hover:opacity-90 px-12 py-4 transition-all shadow-lg active:scale-95 text-lg"
+          >
+            <ShoppingBag size={22} />
+            CHECKOUT ITEM
+          </button>
         </div>
       </div>
     </div>

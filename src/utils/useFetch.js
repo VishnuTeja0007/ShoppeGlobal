@@ -2,37 +2,33 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function useFetch(url) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
+    let ignore = false;
 
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(url);
-        if (!isMounted) return;
-        // Support both list endpoints (products array) and single-item endpoints (object)
-        const payload = response?.data?.products ?? response?.data ?? [];
-        setData(payload);
+        const res = await axios.get(url);
+        if (!ignore) setData(res.data);
       } catch (err) {
-        if (!isMounted) return;
-        setError(err);
+        if (!ignore) setError(err);
       } finally {
-        if (!isMounted) return;
-        setLoading(false);
+        if (!ignore) setLoading(false);
       }
     };
 
-    fetchProducts();
-    return () => {
-      isMounted = false;
-    };
+    fetchData();
+    return () => { ignore = true };
   }, [url]);
 
   return [data, loading, error];
 }
+
+
+
 
 export default useFetch;

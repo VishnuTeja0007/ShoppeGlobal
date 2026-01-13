@@ -52,7 +52,7 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-auto bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-5xl xxs:flex-col mx-auto flex  md:flex-row items-center justify-between gap-8">
         
          {/* Left Column: Delivery Form (60%) */}

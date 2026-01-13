@@ -26,6 +26,7 @@ const appRouter = createBrowserRouter([
       {
         path: 'products',
         element: <ProductLayout />,
+        errorElement: <Error/>,
         children: [
           {
             index: true,
@@ -35,16 +36,26 @@ const appRouter = createBrowserRouter([
             path: ':id',
             element: <ProductDetailPage />,
           },
+          {
+            path: '*',
+            element: <Error/>,
+          }
         ],
       },
       {
         path: 'cart',
         element: <CartPage />,
+        errorElement: <Error/>,
       },
       {
         path: 'checkout',
         element: <CheckoutPage />,
+        errorElement: <Error/>,
       },
+      {
+        path: '*',
+        element: <Error/>,
+      }
     ],
   },
 ]);

@@ -64,13 +64,7 @@ export function Header() {
             >
               Products
             </NavLink>
-            <NavLink
-              to="/products-details"
-              className="text-light-text hover:text-light-primary dark:text-dark-text dark:hover:text-dark-primary transition-colors"
-              activeClassName="text-light-primary dark:text-dark-primary"
-            >
-              Product Details
-            </NavLink>
+            
             <NavLink
               to="/checkout"
               className="text-light-text hover:text-light-primary dark:text-dark-text dark:hover:text-dark-primary transition-colors"

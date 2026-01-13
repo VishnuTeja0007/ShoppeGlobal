@@ -7,12 +7,12 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
   const [showHamburger, setShowHamburger] = useState(true);
-  const [cartItems,setCartItems]=useState(0)
-  const selector=useSelector((state)=>{return state.cart.totalQuantity})
+  const [cartItems, setCartItems] = useState(0)
+  const selector = useSelector((state) => { return state.cart.totalQuantity })
 
-  useEffect(()=>{
+  useEffect(() => {
     setCartItems(selector)
-  },[selector])
+  }, [selector])
   // Sync theme with HTML root
   useEffect(() => {
     const root = document.documentElement;
@@ -50,16 +50,16 @@ export function Header() {
           </NavLink>
 
           {/* TABLET MENU (500px - 767px) */}
-              {/* Theme Toggle */}
-            
+          {/* Theme Toggle */}
+
           <div className={`${showHamburger ? 'hidden' : 'flex'} items-center gap-6`}>
-           <button
+            <button
               onClick={() => setDark(!dark)}
               className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
               aria-label="Toggle theme">
               {dark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
             </button>
-            
+
             <NavLink to="/products" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
               Products
             </NavLink>
@@ -67,12 +67,9 @@ export function Header() {
             <NavLink to="/products-details" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
               Product details
             </NavLink>
-<NavLink to="/checkout" className="text-light-text dark:text-dark-text active:text-gray-300 hover:text-light-primary dark:hover:text-dark-primary transition-colors">
-              checkout
+            <NavLink to="/checkout" className="text-light-text dark:text-dark-text active:text-gray-300 hover:text-light-primary dark:hover:text-dark-primary transition-colors">
+              Checkout
             </NavLink>
-
-
-
             {/* Cart */}
             <NavLink to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
@@ -82,48 +79,26 @@ export function Header() {
             </NavLink>
           </div>
 
-          {/* DESKTOP MENU (768px+) */}
-          <div className="hidden md:flex items-center gap-8">
-            <NavLink to="/products" className="text-light-text active:text-gray-300 dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors">
-              Products
-            </NavLink>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={() => setDark(!dark)}
-              className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
-              aria-label="Toggle theme"
-            >
-              {dark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
-            </button>
-
-            {/* Cart */}
-            <NavLink to="/cart" className="relative">
-              <ShoppingCart className="w-6 h-6 text-light-text  dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary transition-colors" />
-              <span className="absolute -top-2 -right-2 bg-light-accent dark:bg-dark-accent text-white text-xs px-1.5 rounded-full">
-               {cartItems}
-              </span>
-            </NavLink>
-          </div>
+        
 
           {/* MOBILE HAMBURGER (only when <= 500px) */}
           {showHamburger && (
             <div className="md:hidden flex items-center gap-3">
-            {/* Theme Toggle (Mobile) */}
-            <button
-              onClick={() => setDark(!dark)}
-              className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
-            >
-              {dark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
-            </button>
+              {/* Theme Toggle (Mobile) */}
+              <button
+                onClick={() => setDark(!dark)}
+                className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
+              >
+                {dark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
+              </button>
 
-            <button 
-              onClick={() => setOpen(!open)}
-              className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
-              aria-label="Toggle menu"
-            >
-              {open ? <X className="w-6 h-6 text-light-text dark:text-dark-text" /> : <Menu className="w-6 h-6 text-light-text dark:text-dark-text" />}
-            </button>
+              <button
+                onClick={() => setOpen(!open)}
+                className="p-2 rounded-lg hover:bg-light-border dark:hover:bg-dark-border transition-colors"
+                aria-label="Toggle menu"
+              >
+                {open ? <X className="w-6 h-6 text-light-text dark:text-dark-text" /> : <Menu className="w-6 h-6 text-light-text dark:text-dark-text" />}
+              </button>
             </div>
           )}
         </div>

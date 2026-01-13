@@ -65,11 +65,27 @@ const Body = () => {
 
   return (
  
-    <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-300">
+    <div className="min-h-screen p-4 bg-light-bg dark:bg-dark-bg transition-colors duration-300">
       {/* --- Hero Section --- */}
       <section className="relative overflow-hidden px-4 py-12 md:py-20 lg:py-24">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-                    
+                    <div className="w-full xxs:order-0 md:order-1 md:w-1/2 relative">
+                        <div className="relative z-10 w-full rounded-3xl overflow-hidden shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
+                            <img 
+                                src="../src/assets/image.png" 
+                                alt="Modern E-commerce Experience" 
+                                className="w-auto h-auto object-cover md:aspect-[4/3] lg:aspect-[6/4] "
+                                loading="lazy"
+                            />
+                            {/* Overlay Gradient for depth */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                        
+                        {/* Decorative background element */}
+                        <div className="absolute -top-10 -right-10 w-64 h-64 bg-light-secondary/20 dark:bg-dark-secondary/10 rounded-full blur-3xl -z-0"></div>
+                        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-light-accent/20 dark:bg-dark-accent/10 rounded-full blur-3xl -z-0"></div>
+                    </div>
+
                     {/* Content Column */}
                     <div className="w-full md:w-1/2 flex flex-col items-start text-left z-10">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-light-primary/10 dark:bg-dark-primary/10 text-light-primary dark:text-dark-primary text-sm font-semibold mb-6">
@@ -118,23 +134,7 @@ const Body = () => {
                     </div>
 
                     {/* Image Column */}
-                    <div className="w-full md:w-1/2 relative">
-                        <div className="relative z-10 w-full rounded-3xl overflow-hidden shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
-                            <img 
-                                src="../src/assets/image.png" 
-                                alt="Modern E-commerce Experience" 
-                                className="w-full h-auto object-cover aspect-[4/5] md:aspect-square lg:aspect-[4/3]"
-                                loading="lazy"
-                            />
-                            {/* Overlay Gradient for depth */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        </div>
-                        
-                        {/* Decorative background element */}
-                        <div className="absolute -top-10 -right-10 w-64 h-64 bg-light-secondary/20 dark:bg-dark-secondary/10 rounded-full blur-3xl -z-0"></div>
-                        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-light-accent/20 dark:bg-dark-accent/10 rounded-full blur-3xl -z-0"></div>
-                    </div>
-
+                    
                 </div>
             </section>
      

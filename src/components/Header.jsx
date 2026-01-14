@@ -2,7 +2,7 @@ import { ShoppingCart, Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-export function Header() {
+export default function Header() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -53,14 +53,14 @@ export function Header() {
             <NavLink
               to="/"
               className="text-light-text hover:text-light-primary dark:text-dark-text dark:hover:text-dark-primary transition-colors"
-              activeClassName="text-light-primary dark:text-dark-primary"
+             
             >
               Home
             </NavLink>
             <NavLink
               to="/products"
               className="text-light-text hover:text-light-primary dark:text-dark-text dark:hover:text-dark-primary transition-colors"
-              activeClassName="text-light-primary dark:text-dark-primary"
+             
             >
               Products
             </NavLink>
@@ -68,7 +68,7 @@ export function Header() {
             <NavLink
               to="/checkout"
               className="text-light-text hover:text-light-primary dark:text-dark-text dark:hover:text-dark-primary transition-colors"
-              activeClassName="text-light-primary dark:text-dark-primary"
+             
             >
               Checkout
             </NavLink>

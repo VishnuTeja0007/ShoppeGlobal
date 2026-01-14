@@ -85,6 +85,7 @@ export default function ProductDetail() {
         <div className="space-y-6">
           <div className="aspect-square rounded-3xl bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border overflow-hidden">
             <img
+            loading="lazy"
               src={data.images[0]}
               alt={data.title}
               className="w-full h-full object-contain p-6"

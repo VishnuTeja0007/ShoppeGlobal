@@ -221,6 +221,7 @@ const navigate=useNavigate()
                     src={product.thumbnail}
                     className="w-20 h-20 rounded-xl bg-light-bg object-cover border"
                     alt={product.title}
+                    loading='lazy'
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold text-light-text dark:text-dark-text">

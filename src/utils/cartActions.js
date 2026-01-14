@@ -17,11 +17,7 @@ export const decreaseItem = (state, action) => {
             // Just decrease
             existing.noOfItems -= 1;
             state.totalQuantity -= 1;
-        } else {
-            // It's 1, so the next decrease should remove it entirely
-            state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id);
-            state.totalQuantity -= 1;
-        }
+        } 
     }
 };
 

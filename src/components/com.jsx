@@ -108,7 +108,7 @@
               {totals.summary.map((product) => (
                 <div key={product.id} className="flex gap-4 items-center">
                   <div className="relative">
-                    <img src={product.images[0]} className="w-20 h-20 rounded-2xl bg-white object-contain p-2" alt={product.title} />
+                    <img src={product.images[0]} loading="lazy" className="w-20 h-20 rounded-2xl bg-white object-contain p-2" alt={product.title} />
                     <span className="absolute -top-2 -right-2 bg-light-primary text-white text-xs font-black w-6 h-6 flex items-center justify-center rounded-full">
                         {product.qty}
                     </span>

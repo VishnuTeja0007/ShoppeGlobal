@@ -1,18 +1,18 @@
-
-import { createRoot } from 'react-dom/client'
+import { lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from './App';
+import Error from './components/Error';
 import "./index.css";
-import {createBrowserRouter} from "react-router-dom";
-import RouterLayout from "./Layout/RouterLayout"
-import Home from './pages/Home'
-import ProductLayout from './Layout/ProductLayout'
-import {Productlist} from './components/ProductList'
-import ProductDetailPage from './pages/ProductDetailPage'
-import CartPage from './pages/CartPage'
-import CheckoutPage from './pages/CheckoutPage'
-import Error from './components/Error'
-import {RouterProvider} from "react-router-dom"
+import Loading from './components/Loading';
 
-  import App from './App';
+const ProductList =lazy(()=>import('./components/ProductList'))
+// Lazy load pages
+const Home = lazy(() => import('./pages/Home'));
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
+const CartPage = lazy(() => import('./pages/CartPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+
 const appRouter = createBrowserRouter([
   {
     path: '/',
@@ -21,20 +21,29 @@ const appRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loading/>}>
+            <Home />
+          </Suspense>
+        )
       },
       {
         path: 'products',
-        element: <ProductLayout />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <ProductList />
+          </Suspense>
+        ),
         errorElement: <Error/>,
         children: [
-          {
-            index: true,
-            element: <Productlist />,
-          },
+          
           {
             path: ':id',
-            element: <ProductDetailPage />,
+            element:(
+              <Suspense fallback={<Loading />}>
+            <ProductDetailPage />
+          </Suspense>
+            )
           },
           {
             path: '*',
@@ -44,11 +53,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <CartPage />
+        element: (
+          <Suspense fallback={<Loading />}>
+            <CartPage />
+          </Suspense>
+        )
       },
       {
         path: 'checkout',
-        element: <CheckoutPage />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <CheckoutPage />
+          </Suspense>
+        )
       
       },
     ],

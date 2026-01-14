@@ -4,7 +4,7 @@ import { addToCart } from "../utils/cartSlicer";
 import { Star, ShoppingCart, Eye } from "lucide-react";
 import { useEffect } from "react";
 
-export function ProductItem(props) {
+export default function ProductItem(props) {
   const dispatch = useDispatch();
 
   function addItemToCart(item) {

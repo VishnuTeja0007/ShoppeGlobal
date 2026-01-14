@@ -2,7 +2,7 @@ import React from 'react'
 import CartItem from './CartItem'
 import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft,ShoppingBag,ChevronLeft } from 'lucide-react'
 import { useSelector } from 'react-redux'
 const Cart = () => {
    const [cartItems,setCartItems]=useState([])  
@@ -12,10 +12,28 @@ const Cart = () => {
   },[selector])
     if (!cartItems.length) {
       return (
-        <div className="h-screen flex flex-col bg-light-bg dark:bg-dark-bg items-center justify-center gap-4 text-gray-600">
-          <p className="text-lg font-semibold">Your cart is empty</p>
-          <p className="text-sm">Browse products and add something you like.</p>
+         <div className="min-h-screen flex items-center justify-center bg-light-bg dark:bg-dark-bg px-6">
+        <div className="max-w-md w-full text-center space-y-8 p-12 bg-light-surface dark:bg-dark-surface rounded-[3rem] border-2 border-dashed border-light-border dark:border-dark-border">
+          <div className="relative mx-auto w-24 h-24 bg-light-primary/10 rounded-full flex items-center justify-center text-light-primary">
+            <ShoppingBag size={48} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-black text-light-text dark:text-dark-text uppercase tracking-tighter">
+              Your cart is empty
+            </h1>
+            <p className="text-light-muted mt-2 font-medium text-lg">
+              Add some premium items to your basket to proceed with checkout.
+            </p>
+          </div>
+          <Link 
+            to="/products" 
+            className="inline-flex items-center gap-2 bg-light-text dark:bg-dark-primary text-white dark:text-dark-bg px-8 py-4 rounded-2xl font-black transition-transform active:scale-95 shadow-xl"
+          >
+            <ChevronLeft size={20} />
+            BACK TO SHOP
+          </Link>
         </div>
+      </div>
       )
     }
 

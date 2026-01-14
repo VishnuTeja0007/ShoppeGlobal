@@ -17,9 +17,9 @@ import useFetch from "../utils/useFetch";
       } 
 
       if (error) {
-        return (
-          <Error/>
-        );
+          return <Error/>
+        
+        
       }
 
       return  <div className="min-h-screen w-full flex flex-col items-center bg-light-bg dark:bg-dark-bg transition-colors duration-300">

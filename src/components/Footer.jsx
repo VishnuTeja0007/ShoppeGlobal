@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Facebook, Twitter, Disc, Github, Dribbble, ShoppingBag } from "lucide-react";
+import { Facebook, Twitter, Disc, Github } from "lucide-react";
 
 const Footer = () => {
+  // Get current year for copyright
   const currentYear = new Date().getFullYear();
 
   return (
@@ -59,7 +60,7 @@ const Footer = () => {
               Stay updated with our latest releases and tech news.
             </p>
             <div className="flex gap-4">
-               {/* Replace raw SVGs with Lucide for consistency */}
+               {/* Social Icons */}
                <Facebook className="w-5 h-5 cursor-pointer hover:text-dark-primary text-light-muted transition-colors" />
                <Twitter className="w-5 h-5 cursor-pointer hover:text-dark-primary text-light-muted transition-colors" />
                <Disc className="w-5 h-5 cursor-pointer hover:text-dark-primary text-light-muted transition-colors" />

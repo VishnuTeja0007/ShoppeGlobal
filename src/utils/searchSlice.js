@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Redux slice for managing search query state
 const searchSlice = createSlice({
   name: "search",
   initialState: {

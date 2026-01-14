@@ -1,18 +1,22 @@
-import React from 'react'
-import CartItem from './CartItem'
-import { useState,useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { ArrowLeft,ShoppingBag,ChevronLeft } from 'lucide-react'
-import { useSelector } from 'react-redux'
+import CartItem from './CartItem';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, ShoppingBag, ChevronLeft, ShoppingCart } from 'lucide-react';
+import { useSelector } from 'react-redux';
+
 const Cart = () => {
-   const [cartItems,setCartItems]=useState([])  
-  const selector=useSelector((state)=>{return state.cart.cartItems})
-  useEffect(()=>{
-    setCartItems(selector)
-  },[selector])
-    if (!cartItems.length) {
-      return (
-         <div className="min-h-screen flex items-center justify-center bg-light-bg dark:bg-dark-bg px-6">
+  const [cartItems, setCartItems] = useState([]);
+  const selector = useSelector((state) => state.cart.cartItems);
+
+  // Sync local state with Redux store
+  useEffect(() => {
+    setCartItems(selector);
+  }, [selector]);
+
+  // Render empty state if cart is empty
+  if (!cartItems.length) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-light-bg dark:bg-dark-bg px-6">
         <div className="max-w-md w-full text-center space-y-8 p-12 bg-light-surface dark:bg-dark-surface rounded-[3rem] border-2 border-dashed border-light-border dark:border-dark-border">
           <div className="relative mx-auto w-24 h-24 bg-light-primary/10 rounded-full flex items-center justify-center text-light-primary">
             <ShoppingBag size={48} />
@@ -34,10 +38,10 @@ const Cart = () => {
           </Link>
         </div>
       </div>
-      )
-    }
+    );
+  }
 
-   return (
+  return (
     <div className="min-h-screen w-full bg-light-bg dark:bg-dark-bg py-12 transition-colors duration-300">
       <div className="max-w-5xl mx-auto px-4 flex flex-col items-center gap-8">
         
@@ -54,25 +58,24 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <div className="w-full flex flex-col gap-8 items-center">
             {cartItems.map((item) => {
-              // Ensure we are passing all necessary props to our enhanced CartItem
+              // Render individual cart items
               return (
                 <CartItem 
                   key={item.id} 
                   item={item} 
-                  // Assuming logic for these is handled in parent or via dispatch
                   discountedPrice={(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}
                 />
               );
             })}
             
-            {/* Optional: Return to Shop Link */}
+            {/* Return to Shop Link */}
             <Link to="/products" className="flex items-center gap-2 text-light-primary font-black uppercase tracking-widest hover:underline mt-4">
               <ArrowLeft size={20} />
               Continue Shopping
             </Link>
           </div>
         ) : (
-          /* Enhanced Empty State */
+          /* Enhanced Empty State - Fallback (though main empty state handles this) */
           <div className="flex flex-col items-center justify-center py-20 text-center gap-6 bg-light-surface dark:bg-dark-surface w-full rounded-[3rem] border-2 border-dashed border-light-border dark:border-dark-border">
             <div className="p-8 bg-light-bg dark:bg-dark-bg rounded-full text-light-muted opacity-50">
                <ShoppingCart size={80} strokeWidth={1} />
@@ -92,7 +95,6 @@ const Cart = () => {
       </div>
     </div>
   );
-  
-}
+};
 
-export default Cart
+export default Cart;

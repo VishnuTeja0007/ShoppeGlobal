@@ -1,17 +1,18 @@
-import  ProductItem  from "./ProductItem";
+import ProductItem from "./ProductItem";
 import Error from "./Error";
 import Loading from "./Loading";
 import useFetch from "../utils/useFetch";
 import { setSearchQuery } from "../utils/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Search,XCircle } from "lucide-react";
-export default function Productlist() {
+import { Search, XCircle } from "lucide-react";
+
+export default function ProductList() {
   const dispatch = useDispatch();
 
-  // 🔍 Get search query from Redux
+  // Get search query from Redux
   const query = useSelector((state) => state.search.query);
 
-  // 📦 Fetch products
+  // Fetch products
   const [data, loading, error] = useFetch("https://dummyjson.com/products");
 
   if (loading) {
@@ -26,7 +27,7 @@ export default function Productlist() {
     return <Error />;
   }
 
-  // ✅ Filter products using Redux state
+  // Filter products using Redux state
   const filteredProducts = data?.products?.filter((product) =>
     product.title.toLowerCase().includes(query.toLowerCase())
   );
@@ -34,13 +35,13 @@ export default function Productlist() {
   return (
     <div className="min-h-screen w-full flex gap-4 flex-col items-center bg-light-bg dark:bg-dark-bg transition-colors duration-300">
     
-    {/* 🔍 Enhanced Search Bar */}
-<div className="w-full max-w-3xl mx-auto mt-5 mb-10 px-4">
-  <div className="relative group">
-    {/* Search Icon */}
-    <div className="absolute left-6 top-1/2 -translate-y-1/2 text-light-muted group-focus-within:text-light-primary transition-colors">
-      <Search size={24} strokeWidth={3} />
-    </div>
+    {/* Enhanced Search Bar */}
+    <div className="w-full max-w-3xl mx-auto mt-5 mb-10 px-4">
+      <div className="relative group">
+        {/* Search Icon */}
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 text-light-muted group-focus-within:text-light-primary transition-colors">
+          <Search size={24} strokeWidth={3} />
+        </div>
 
     <input
       type="text"

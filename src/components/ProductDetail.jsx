@@ -1,32 +1,18 @@
 import { 
-  StarIcon, 
-  Truck, 
-  ShieldCheck, 
-  RotateCcw, 
   Package, 
   ShoppingCart, 
-  Zap,
-  CheckCircle2,
-  Minus,
-  Plus
+  Star, 
+  Ruler, 
+  Weight, 
+  Hash 
 } from "lucide-react";
 import useFetch from "../utils/useFetch";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Error from "./Error"; 
 import Loading from "./Loading";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../utils/cartSlicer";
-
-import { 
-  Star, 
-  Ruler, Weight, Hash 
-} from "lucide-react";
 import React from "react";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}  
-
 
 export default function ProductDetail() {
    

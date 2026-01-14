@@ -5,44 +5,48 @@ import App from './App';
 import Error from './components/Error';
 import "./index.css";
 import Loading from './components/Loading';
-
-const ProductList =lazy(()=>import('./components/ProductList'))
-// Lazy load pages
+import ProductLayout from './Layout/ProductLayout';
+// Lazy load components for code splitting
+const ProductList = lazy(() => import('./components/ProductList'));
 const Home = lazy(() => import('./pages/Home'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 
+// Define application routes with lazy loading and error handling
 const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Error/>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
         element: (
-          <Suspense fallback={<Loading/>}>
+          <Suspense fallback={<Loading />}>
             <Home />
           </Suspense>
         )
       },
       {
         path: 'products',
-        element: (
-          <Suspense fallback={<Loading />}>
-            <ProductList />
-          </Suspense>
-        ),
-        errorElement: <Error/>,
+        element: <ProductLayout />,
+        errorElement: <Error />,
         children: [
-          
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProductList />
+              </Suspense>
+            )
+          },
           {
             path: ':id',
-            element:(
+            element: (
               <Suspense fallback={<Loading />}>
-            <ProductDetailPage />
-          </Suspense>
+                <ProductDetailPage />
+              </Suspense>
             )
           },
           {
@@ -66,14 +70,11 @@ const appRouter = createBrowserRouter([
             <CheckoutPage />
           </Suspense>
         )
-      
       },
     ],
   },
 ]);
 
-
 createRoot(document.getElementById('root')).render(
-
-<RouterProvider router={appRouter}></RouterProvider>
-)
+  <RouterProvider router={appRouter} />
+);

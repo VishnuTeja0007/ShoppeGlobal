@@ -2,14 +2,12 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../utils/cartSlicer";
 import { Star, ShoppingCart, Eye } from "lucide-react";
-import { useEffect } from "react";
 
 export default function ProductItem(props) {
   const dispatch = useDispatch();
 
   function addItemToCart(item) {
     // Ensuring we pass a clean object to the dispatcher
-    console.log("dispatch called")
     dispatch(addToCart({ ...item, noOfItems: 1 }));
   }
  
@@ -31,7 +29,7 @@ export default function ProductItem(props) {
   };
 
   return (
-    <div className="group relative flex flex-col w-full max-w-sm bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl overflow-hidden hover:border-light-primary/50 dark:hover:border-dark-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="group relative flex flex-col xs:mx-auto  w-full max-w-sm bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl overflow-hidden hover:border-light-primary/50 dark:hover:border-dark-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       
       {/* Product Image Wrapper */}
       <div className="relative aspect-square overflow-hidden bg-white">

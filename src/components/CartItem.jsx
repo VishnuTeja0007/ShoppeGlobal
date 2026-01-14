@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import { addToCart, decreaseCart, removeCart } from "../utils/cartSlicer";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 const CartItem = ({ item }) => {
   const [showWarning, setShowWarning] = useState(false);
   const dispatch = useDispatch();
   
   const discountedPrice = (item.price * (1 - item.discountPercentage / 100)).toFixed(2);
 
-  // 1. Logic to handle the "Minimum Limit" warning
+  // Logic to handle the "Minimum Limit" warning
   const handleDecrease = () => {
     if (item.noOfItems <= 1) {
       setShowWarning(true);
@@ -18,7 +19,7 @@ const CartItem = ({ item }) => {
     }
   };
 
-  // 2. Auto-hide the warning after 2 seconds
+  // Auto-hide the warning after 2 seconds
   useEffect(() => {
     if (showWarning) {
       const timer = setTimeout(() => setShowWarning(false), 2000);
@@ -32,7 +33,7 @@ const CartItem = ({ item }) => {
   return (
     <div className="h-auto w-full flex flex-col md:flex-row items-center justify-start border-2 rounded-[2rem] p-6 border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface gap-8 transition-all hover:border-light-primary/50 hover:shadow-xl group relative">
       
-      {/* 📸 Image Container */}
+      {/*  Image Container */}
       <div className="flex-shrink-0 bg-white p-4 rounded-2xl border border-light-border dark:border-dark-border shadow-inner">
         <img 
           src={item.images[0]} 
@@ -59,7 +60,7 @@ const CartItem = ({ item }) => {
           {item.title}
         </h1>
 
-        {/* 🏷️ Pricing */}
+        {/* Pricing */}
         <div className="flex items-center gap-4 py-2">
           <span className="text-4xl font-black text-light-text dark:text-dark-text">
             ${discountedPrice}
@@ -69,7 +70,7 @@ const CartItem = ({ item }) => {
           </span>
         </div>
 
-        {/* 🛠️ Actions Section */}
+        {/* Actions Section */}
         <div className="flex flex-wrap items-center justify-between gap-6 mt-4 pt-6 border-t border-light-border dark:border-dark-border relative">
           
           <div className="flex items-center gap-4">
@@ -93,7 +94,7 @@ const CartItem = ({ item }) => {
                 </button>
             </div>
 
-            {/* ⚠️ Dynamic Warning Tooltip */}
+            {/*  Dynamic Warning Tooltip */}
             {showWarning && (
                 <div className="absolute -top-4 left-0 flex items-center gap-2 text-rose-600 bg-rose-50 px-4 py-2 rounded-full border border-rose-200 shadow-sm animate-in fade-in slide-in-from-bottom-2">
                     <AlertCircle size={16} />

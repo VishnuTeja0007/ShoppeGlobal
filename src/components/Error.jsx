@@ -5,15 +5,14 @@ import { useState } from "react";
 const Error = () => {
   const error = useRouteError();
   const location = useLocation();
-  const theme="light"
-  const [light,setLight]=useState(true)
-  function themeChange(){
-    setLight(!light)
+  const [light, setLight] = useState(true);
+
+  function themeChange() {
+    setLight(!light);
   }
+
   const status = isRouteErrorResponse(error) ? error.status : 500;
-  const title = isRouteErrorResponse(error) ? error.statusText
-    : "System Glitch";
-   
+  const title = isRouteErrorResponse(error) ? error.statusText : "System Glitch";
 
   const message = isRouteErrorResponse(error)
     ? error.data?.message || "The page you are looking for has migrated or doesn't exist."

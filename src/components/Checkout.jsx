@@ -44,11 +44,8 @@ const navigate=useNavigate()
   },[submitStatus])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     dispatch(clearCart());
     setSubmitStatus(true);
-
-
   };
 
   if (!selector.length && !submitStatus) {

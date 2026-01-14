@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { addAction, decreaseItem, removeFromCart } from "./cartActions"
+import { createSlice } from "@reduxjs/toolkit";
+import { addAction, decreaseItem, removeFromCart } from "./cartActions";
+
+// Redux slice for managing cart state
 const cartSlice = createSlice({
     name: "cartItems",
     initialState: {
@@ -7,15 +9,16 @@ const cartSlice = createSlice({
         totalQuantity: 0
     },
     reducers: {
-        addToCart:addAction,
+        addToCart: addAction,
         decreaseCart: decreaseItem,
         removeCart: removeFromCart,
         clearCart: (state) => {
-            state.cartItems = []
-            state.totalQuantity = 0
+            state.cartItems = [];
+            state.totalQuantity = 0;
         }
     }
-})
-export const { addToCart, decreaseCart, removeCart, clearCart } = cartSlice.actions
+});
 
-export default cartSlice.reducer
+export const { addToCart, decreaseCart, removeCart, clearCart } = cartSlice.actions;
+
+export default cartSlice.reducer;

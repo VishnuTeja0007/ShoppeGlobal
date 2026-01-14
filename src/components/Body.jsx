@@ -6,11 +6,12 @@ import {
   ShieldCheck, 
   Smartphone, 
   Moon, 
-  Database 
+  Database,
+  ArrowRight, 
+  ShoppingCart 
 } from "lucide-react";
 
-import {  ArrowRight, ShoppingCart } from "lucide-react";
-
+// Component for displaying individual feature cards with animation
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   <div 
     className={`group p-8 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface hover:border-dark-primary/50 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 animate-slide-up`}
@@ -28,8 +29,8 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   </div>
 );
 
-
 const Body = () => {
+  // Array of features to display in the features section
   const features = [
     {
       icon: ShoppingBag,
@@ -64,7 +65,6 @@ const Body = () => {
   ];
 
   return (
- 
     <div className="min-h-screen p-4 bg-light-bg dark:bg-dark-bg transition-colors duration-300">
       {/* --- Hero Section --- */}
       <section className="relative overflow-hidden px-4 py-12 md:py-20 lg:py-24">

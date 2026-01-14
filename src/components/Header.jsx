@@ -2,6 +2,7 @@ import { ShoppingCart, Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
@@ -9,11 +10,12 @@ export default function Header() {
   const [cartItems, setCartItems] = useState(0);
   const selector = useSelector((state) => state.cart.totalQuantity);
 
+  // Sync cart items count from Redux store
   useEffect(() => {
     setCartItems(selector);
   }, [selector]);
 
-  // Sync theme with HTML root
+  // Sync theme with HTML root element
   useEffect(() => {
     const root = document.documentElement;
     if (dark) {
@@ -23,7 +25,7 @@ export default function Header() {
     }
   }, [dark]);
 
-  // Handle window resize
+  // Handle window resize to manage mobile menu state
   useEffect(() => {
     function handleResize() {
       const mobile = window.innerWidth < 768;
@@ -168,7 +170,20 @@ export default function Header() {
       >
         Products
       </NavLink>
-      {/* ... repeat for other links ... */}
+ 
+      <NavLink
+        to="/checkout"
+        className={({ isActive }) => 
+          `p-3 rounded-xl transition-colors ${
+            isActive 
+              ? "bg-light-primary/10 text-light-primary dark:bg-dark-primary/10 dark:text-dark-primary" 
+              : "text-light-text dark:text-dark-text hover:bg-light-border/50 dark:hover:bg-dark-border/50"
+          }`
+        }
+        onClick={() => setOpen(false)}
+      >
+        Checkout
+      </NavLink>
       
       <NavLink
         to="/cart"

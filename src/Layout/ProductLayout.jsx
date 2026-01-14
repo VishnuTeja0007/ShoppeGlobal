@@ -1,13 +1,14 @@
-import React from 'react'
-import { Productlist } from '../components/ProductList'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
+// Layout wrapper for product-related routes
 const ProductLayout = () => {
   return (
     <div>
+      {/* Renders child routes */}
       <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default ProductLayout
+export default ProductLayout;

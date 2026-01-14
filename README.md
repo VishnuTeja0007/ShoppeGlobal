@@ -98,7 +98,6 @@ Global state is managed using **Redux Toolkit**:
 ### Tech Stack
 -    React 19 + Vite
 -    Tailwind CSS v4
--    Redux Toolkit for user-added books
 -    React Router for routing
 -    Lucide/react-icons for UI icons
 ### Contact

@@ -1,11 +1,13 @@
 /* From Uiverse.io by Nawsome */ 
 .loader {
-  --background: linear-gradient(135deg, #23C4F8, #275EFE);
-  --shadow: rgba(39, 94, 254, 0.28);
-  --text: #6C7486;
-  --page: rgba(255, 255, 255, 0.36);
-  --page-fold: rgba(255, 255, 255, 0.52);
+  /* Using your Brand Primary (Teal) and Secondary (Slate) */
+  --background: linear-gradient(135deg, #0d9488, #115e59); /* Teal 600 to Teal 800 */
+  --shadow: rgba(13, 148, 136, 0.2);
+  --text: #64748b; /* Slate 500 */
+  --page: rgba(255, 255, 255, 0.45);
+  --page-fold: rgba(255, 255, 255, 0.6);
   --duration: 3s;
+  
   width: 200px;
   height: 140px;
   position: relative;
@@ -38,10 +40,14 @@
   position: relative;
   z-index: 1;
   perspective: 600px;
-  box-shadow: 0 4px 6px var(--shadow);
+  /* Softened shadow to match our UI cards */
+  box-shadow: 0 10px 30px var(--shadow);
   background-image: var(--background);
 }
-
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.95); }
+}
 .loader div ul {
   margin: 0;
   padding: 0;
@@ -108,9 +114,15 @@
   left: 0;
   right: 0;
   top: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   text-align: center;
   color: var(--text);
+  font-family: inherit;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 14px;
+  animation: pulse 1.5s infinite ease-in-out;
 }
 
 @keyframes page-2 {

@@ -42,7 +42,7 @@ export default function ProductDetail() {
 
   if (loading){
     return (
-      <div className="h-screen w-full flex items-center justify-center">
+      <div className="h-screen w-full bg-light-bg dark:bg-dark-bg flex items-center justify-center">
         <Loading/>
       </div>
     )

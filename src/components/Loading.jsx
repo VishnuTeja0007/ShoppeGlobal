@@ -3,7 +3,7 @@ import './styles/Loading.css'
 
 const Loading = () => {
   return (
-    <div>
+    <div className='bg-light-bg dark:bg-dark-bg'>
       
 <div className="loader">
   <div>
